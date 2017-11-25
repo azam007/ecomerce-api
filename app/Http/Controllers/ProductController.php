@@ -54,7 +54,21 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        //
+        //change description to detail
+        $request['detail'] = $request->description;
+        unset($request['description']);
+        if($product->update($request->all())){
+            return response()->json([
+                'success' => true,
+                'message' => 'Product Updated',
+                'data' => [
+                    'type' => $product->typeKey(),
+                    'id' => $product->id,
+                    'attributes' => new ProductResource($product),
+                ]
+            ]);
+        };
+
     }
 
 
