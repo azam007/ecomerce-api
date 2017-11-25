@@ -66,7 +66,7 @@ class ProductController extends Controller
                     'id' => $product->id,
                     'attributes' => new ProductResource($product),
                 ]
-            ]);
+                ], Response::HTTP_CREATED);
         };
 
     }
